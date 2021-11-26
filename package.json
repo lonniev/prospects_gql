@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.6.1",
     "@neo4j/graphql": "^2.4.0",
     "apollo-server-micro": "^3.5.0",
     "graphql": "^16.0.1",
