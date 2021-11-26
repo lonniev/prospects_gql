@@ -2,7 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 
 export const typeDefs =
-```
+`
 scalar URL
 scalar EmailAddress
 scalar PositiveFloat
@@ -130,6 +130,6 @@ type Connector {
   offersCRUD: [Repository] @relationship(type: "OffersCRUD", direction: OUT)
   realizes: [Connector] @relationship(type: "RealizesEpic", direction: OUT)
 }
-```
+`
 
   
