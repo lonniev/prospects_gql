@@ -1,8 +1,9 @@
 import fs from 'fs'
+import { join } from 'path'
 
 export const typeDefs = fs
   .readFileSync(
-    process.env.GRAPHQL_SCHEMA || 'schema.graphql'
+    join( process.cwd(), 'schema.graphql' )
   )
   .toString('utf-8')
 
