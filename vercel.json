@@ -1,5 +1,4 @@
 {
-    // https://github.com/vercel/next.js/issues/8251#issuecomment-961930976
     "functions": {
        "api/loadschema.js": {
           "includeFiles": "schemas/**/*.graphql"
