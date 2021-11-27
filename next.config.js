@@ -6,5 +6,6 @@ module.exports = {
       layers: true,
     };
     return config;
-  }
+  },
+  unstable_includeFiles: ['api/schemas/**']
 }

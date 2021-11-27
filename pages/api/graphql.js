@@ -34,5 +34,4 @@ export const config = {
   api: {
     bodyParser: false,
   },
-  unstable_includeFiles: ['schemas']
 };
