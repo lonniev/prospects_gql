@@ -1,10 +1,10 @@
-import { gql, ApolloServer } from "apollo-server-micro";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { gql, ApolloServer } from "apollo-server-micro"
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import {Neo4jGraphQL} from "@neo4j/graphql"
 import neo4j from "neo4j-driver"
 import 'ts-tiny-invariant' // importing this module as a workaround for issue described here: https://github.com/vercel/vercel/discussions/5846
 
-import { typeDefs } from './loadschema'
+import { typeDefs } from "./loadschema"
 
 const driver = neo4j.driver(
     process.env.NEO4J_URI || 'bolt://localhost:7687',
