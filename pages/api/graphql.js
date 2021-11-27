@@ -22,19 +22,25 @@ const apolloServer = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
-const startServer = apolloServer.start();
+const apolloHander = async (req,res) =>
+{
+  await apolloServer.start()
+  await apolloServer.createHandler(
+    {
+      path: "/api/graphql",
+    }
+  )(req, res)
+}
 
-export default withApiAuthRequired( async function handler(req, res) {
+export default withApiAuthRequired( async (req, res) => {
     try {
-      const { accessToken } = await getAccessToken(req, res);
+      const { accessToken } = await getAccessToken(req, res)
 
-      await startServer;
-      await apolloServer.createHandler({
-        path: "/api/graphql",
-      })(req, res);
-
+      console.error( accessToken )
+      
+      return apolloHander(req, res)
     } 
-    catch(error) 
+    catch( error ) 
     {
       console.error(error)
       res.status(error.status || 500).end(error.message)
