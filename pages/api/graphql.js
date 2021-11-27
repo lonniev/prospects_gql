@@ -4,10 +4,6 @@ import {Neo4jGraphQL} from "@neo4j/graphql"
 import neo4j from "neo4j-driver"
 import 'ts-tiny-invariant' // importing this module as a workaround for issue described here: https://github.com/vercel/vercel/discussions/5846
 
-export const config = {
-  unstable_includeFiles: ['schemas']
-}
-
 import { typeDefs } from './loadschema'
 
 const driver = neo4j.driver(
@@ -38,4 +34,5 @@ export const config = {
   api: {
     bodyParser: false,
   },
+  unstable_includeFiles: ['schemas']
 };
