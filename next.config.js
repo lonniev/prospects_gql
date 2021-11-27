@@ -6,6 +6,5 @@ module.exports = {
       layers: true,
     };
     return config;
-  },
-  pageExtensions: ['graphql', 'jsx', 'js', 'tsx', 'ts'],
+  }
 }

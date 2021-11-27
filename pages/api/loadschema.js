@@ -1,6 +1,10 @@
 import fs from 'fs'
 import { join } from 'path'
 
+export const config = {
+  unstable_includeFiles: ['schemas']
+}
+
 // Since Next.js compiles your code into a separate directory
 // you can't use __dirname as the path it will return will be different from the pages directory.
 // Instead you can use process.cwd() 
