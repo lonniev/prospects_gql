@@ -36,9 +36,7 @@ export default withApiAuthRequired( async (req, res) => {
     try {
       const { accessToken } = await getAccessToken(req, res)
 
-      console.error( accessToken )
-      
-      return apolloHander(req, res)
+      return apolloHander
     } 
     catch( error ) 
     {
