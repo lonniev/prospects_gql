@@ -1,5 +1,7 @@
+import {gql} from "graphql-tag"
+
 export const typeDefs = 
-```
+gql`
 scalar URL
 scalar EmailAddress
 scalar PositiveFloat
@@ -127,4 +129,4 @@ type Connector {
   offersCRUD: [Repository] @relationship(type: "OffersCRUD", direction: OUT)
   realizes: [Connector] @relationship(type: "RealizesEpic", direction: OUT)
 }
-```
+`
