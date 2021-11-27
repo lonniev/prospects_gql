@@ -7,5 +7,5 @@ module.exports = {
     };
     return config;
   },
-  outputFileTracing: true, // https://github.com/vercel/next.js/issues/8251#issuecomment-961930976
+  pageExtensions: ['graphql', 'jsx', 'js', 'tsx', 'ts'],
 }

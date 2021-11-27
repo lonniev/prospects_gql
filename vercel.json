@@ -1,7 +1,0 @@
-{
-    "functions": {
-       "api/loadschema.js": {
-          "includeFiles": "schemas/**/*.graphql"
-       }
-    }
- }
