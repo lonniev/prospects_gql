@@ -41,7 +41,7 @@ const askApolloServerToHandleRequest = async (req,res) =>
 export default async function handler (req, res) {
     try 
     {
-      decodedToken = isTokenValid( req.headers.authorization )
+      const decodedToken = await isTokenValid( req.headers.authorization )
 
       return askApolloServerToHandleRequest ( req, res )
     } 
