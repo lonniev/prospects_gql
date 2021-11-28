@@ -13,16 +13,18 @@ const driver = neo4j.driver(
     neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD)
 )
 
-const neoSchema = new Neo4jGraphQL({typeDefs, driver})
+const neoSchema = new Neo4jGraphQL( { typeDefs, driver } )
 
-const apolloServer = new ApolloServer({
-  schema: neoSchema.schema,
-  playground: true,
-  introspection: true,
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
-});
+const apolloServer = new ApolloServer(
+  {
+    schema: neoSchema.schema,
+    playground: true,
+    introspection: true,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  }
+);
 
-const apolloHander = async (req,res) =>
+const askApolloServerToHandleRequest = async (req,res) =>
 {
   await apolloServer.start()
   await apolloServer.createHandler(
@@ -33,15 +35,19 @@ const apolloHander = async (req,res) =>
 }
 
 export default withApiAuthRequired( async (req, res) => {
-    try {
-      const { accessToken } = await getAccessToken(req, res)
+    try 
+    {
+      const { accessToken } = await getAccessToken( req, res )
 
-      return apolloHander
+      return askApolloServerToHandleRequest ( req, res )
     } 
     catch( error ) 
     {
       console.error(error)
-      res.status(error.status || 500).end(error.message)
+
+      res
+        .status( error.status || 500 )
+        .end(error.message)
     }
   }
 )
