@@ -3,7 +3,7 @@ import jwksClient from "jwks-rsa"
 
 const client = jwksClient(
     {
-        jwksUri: `https://${process.env.AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`
+        jwksUri: `${process.env.AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`
     }
 )
 
@@ -32,8 +32,8 @@ export default function isTokenValid( token )
                 getKey,
 
                 {
-                    audience: process.env.API_IDENTIFIER,
-                    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+                    audience: `${process.env.AUTH0_BASE_URL}/api/graphql`,
+                    issuer: process.env.AUTH0_ISSUER_BASE_URL,
                     algorithms: ["RS256"]
                 },
                 
