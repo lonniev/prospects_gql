@@ -3,7 +3,7 @@ import jwksClient from "jwks-rsa"
 
 const client = jwksClient(
     {
-        jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+        jwksUri: `https://${process.env.AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`
     }
 )
 
@@ -16,7 +16,7 @@ function getKey( header, callback )
     )
 }
 
-async function isTokenValid( token )
+export default function isTokenValid( token )
 {
   if (token)
   {
@@ -52,5 +52,3 @@ async function isTokenValid( token )
 
   return Promise.reject( { error: "No token provided", message: "No token provided" } )
 }
-
-export default isTokenValid
