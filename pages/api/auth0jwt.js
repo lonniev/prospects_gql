@@ -9,7 +9,7 @@ function getKey( header, callback )
         }
     )
     .getSigningKey( header.kid,
-        (error, key) => { callback(null, key.getPublicKey() ) }
+        (error, key) => { callback( null, key.getPublicKey() ) }
     )
 }
 
@@ -18,7 +18,7 @@ export default function isTokenValid( token )
     token = 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjNaMjVqVXcwdWo0NHp2Y216aEtDSiJ9.eyJpc3MiOiJodHRwczovL2Rldi1iNWh5bWZ0ZS51cy5hdXRoMC5jb20vIiwic3ViIjoiT3l1OWV1N0Y0N3hsbFBMOUhTT1FpOTZaTTVxbHI0eVFAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vcHJvc3BlY3RzLWdxbC52ZXJjZWwuYXBwL2FwaS9ncmFwaHFsIiwiaWF0IjoxNjM4MDczMDE2LCJleHAiOjE2MzgxNTk0MTYsImF6cCI6Ik95dTlldTdGNDd4bGxQTDlIU09RaTk2Wk01cWxyNHlRIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.oMtAkOUwi5rThVpxfUoQiTgLXSbHc5pYgtxCKHzIlT_pnvgpoEXzjkmjlslCsJDztKrhuEMnAnLsuSZj9bvRSyPtJZ_tw-Cs6E6Q6VimUmYT9G-tUetLpJTkGyKtWjVb0dU6fEyJWaUhueuhqKqfYTvHHe1j36cjCdirqak2VzR1YufMaWtL7rcwL1BL-G4kApl2huE6h7A_FkybIqfc1z1aU72mgb7ouMzRebEuPtX8h6WPNWH58EZCXztLSoUvjhQ-Coz_HRrvAT02mQrQDyyWFR8FbjVoLmgoKMCYJmgQDprAeiKfDCE8aoj48_QcjqCDHcxlZwx92rbpUs00oQ'
     if (!Boolean(token))
     {
-        return Promise.reject( { error: "No token provided", message: "No token provided" } )
+        return Promise.reject( { error: "No token provided", message: "No Authorization Header with a Bearer JWT was provided" } )
     }
 
     const bearerToken = token.split(" ");
@@ -38,12 +38,12 @@ export default function isTokenValid( token )
                 (error, decoded) => {
                     if (error)
                     {
-                        reject( { error } )
+                        reject( error )
                     }
 
                     if (decoded)
                     {
-                        resolve( { decoded } )
+                        resolve( decoded )
                     }
                 }
             )
