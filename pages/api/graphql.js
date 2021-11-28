@@ -1,12 +1,12 @@
-import { gql, ApolloServer } from "apollo-server-micro"
+import { ApolloServer } from "apollo-server-micro"
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
-import {Neo4jGraphQL} from "@neo4j/graphql"
+import { Neo4jGraphQL } from "@neo4j/graphql"
 import neo4j from "neo4j-driver"
 import 'ts-tiny-invariant' // importing this module as a workaround for issue described here: https://github.com/vercel/vercel/discussions/5846
 
 import { typeDefs } from "./loadschema"
 
-import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0'
+import { isTokenValid } from "./auth0jwt"
 
 const driver = neo4j.driver(
     process.env.NEO4J_URI || 'bolt://localhost:7687',
@@ -38,23 +38,22 @@ const askApolloServerToHandleRequest = async (req,res) =>
   )(req, res)
 }
 
-export default withApiAuthRequired( async (req, res) => {
+export default async function handler (req, res) {
     try 
     {
-      const { accessToken } = await getAccessToken( req, res )
+      decodedToken = isTokenValid( req.headers.authorization )
 
       return askApolloServerToHandleRequest ( req, res )
     } 
     catch( error ) 
     {
-      console.error(error)
+      console.error( error )
 
       res
-        .status( error.status || 500 )
-        .end(error.message)
+        .status( 401 )
+        .end( error.message )
     }
   }
-)
 
 export const config = {
   api: {
