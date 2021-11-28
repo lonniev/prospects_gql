@@ -42,8 +42,6 @@ export default async function handler (req, res) {
     try 
     {
       const decodedToken = await isTokenValid( req?.headers?.authorization )
-
-      return askApolloServerToHandleRequest ( req, res )
     } 
     catch( error ) 
     {
@@ -52,7 +50,11 @@ export default async function handler (req, res) {
       res
         .status( 401 )
         .end( error.message )
+
+      return
     }
+
+    askApolloServerToHandleRequest ( req, res )
   }
 
 export const config = {
