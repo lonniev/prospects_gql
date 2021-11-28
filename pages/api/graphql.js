@@ -24,9 +24,13 @@ const apolloServer = new ApolloServer(
   }
 );
 
+// BIZARRE: https://github.com/apollographql/apollo-server/issues/5065#issuecomment-974397993
+const askApolloServerToStartItself = apolloServer.start()
+
 const askApolloServerToHandleRequest = async (req,res) =>
 {
-  await apolloServer.start()
+  await askApolloServerToStartItself
+  
   await apolloServer.createHandler(
     {
       path: "/api/graphql",
