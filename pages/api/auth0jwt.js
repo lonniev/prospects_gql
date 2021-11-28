@@ -37,12 +37,12 @@ export default function isTokenValid( token )
                 (error, decoded) => {
                     if (error)
                     {
-                        reject( error )
+                        reject( {error} )
                     }
 
                     if (decoded)
                     {
-                        resolve( decoded )
+                        resolve( {decoded} )
                     }
                 }
             )
