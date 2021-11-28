@@ -18,8 +18,11 @@ function getKey( header, callback )
 
 export default function isTokenValid( token )
 {
-  if (token)
-  {
+    if (!Boolean(token))
+    {
+        return Promise.reject( { error: "No token provided", message: "No token provided" } )
+    }
+
     const bearerToken = token.split(" ");
 
     return new Promise( (resolve, reject) => {
@@ -48,7 +51,4 @@ export default function isTokenValid( token )
             )
         }
     )
-  }
-
-  return Promise.reject( { error: "No token provided", message: "No token provided" } )
 }

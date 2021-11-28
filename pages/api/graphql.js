@@ -6,7 +6,7 @@ import 'ts-tiny-invariant' // importing this module as a workaround for issue de
 
 import { typeDefs } from "./loadschema"
 
-import { isTokenValid } from "./auth0jwt"
+import isTokenValid from "./auth0jwt"
 
 const driver = neo4j.driver(
     process.env.NEO4J_URI || 'bolt://localhost:7687',
@@ -41,7 +41,7 @@ const askApolloServerToHandleRequest = async (req,res) =>
 export default async function handler (req, res) {
     try 
     {
-      const decodedToken = await isTokenValid( req.headers.authorization )
+      const decodedToken = await isTokenValid( req?.headers?.authorization )
 
       return askApolloServerToHandleRequest ( req, res )
     } 
