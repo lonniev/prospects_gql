@@ -52,8 +52,9 @@ type EmploysInRole {
   name: String!
   description: String
 
-  company: Company @relationship(type: "Has", direction: IN)
-  role: Role! @relationship(type: "FilledRole", direction: IN)
+  company: Company! @relationship(type: "HasStaffedRole", direction: IN)
+  role: Role! @relationship(type: "FilledRole", direction: OUT)
+  person: Person! @relationship(type: "FillsRole", direction: OUT)
 }
 
 type WebPage {
