@@ -67,6 +67,17 @@ type WebPage {
   relevantTo: [Person] @relationship(type: "Relevant", direction: OUT)
 }
 
+type Conversation {
+  created: DateTime @timestamp(operations: [CREATE])
+  updated: DateTime @timestamp(operations: [CREATE, UPDATE])
+
+  name: String!
+  occurred: DateTime!
+  description: String!
+
+  participants: [EmploysInRole] @relationship(type: "Participated", direction: OUT)
+}
+
 type UseCase {
   name: String!
   description: String

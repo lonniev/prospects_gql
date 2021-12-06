@@ -1,3 +1,6 @@
 {
-    "editor.fontFamily": "Source Code Pro"
+    "editor.fontFamily": "Source Code Pro",
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }
