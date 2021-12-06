@@ -76,6 +76,7 @@ type Conversation {
   description: String!
 
   participants: [EmploysInRole] @relationship(type: "Participated", direction: OUT)
+  useCases: [UseCase] @relationship(type: "Discussed", direction: OUT)
 }
 
 type UseCase {
